@@ -46,7 +46,8 @@ while True:
                 print("Пришел", new_user.pupil_name, now.strftime("%d.%m.%Y %H:%M:%S"))
                 print("++++++++++++++++++++++++++++++++++++++")
 
-                if new_user.last_visit is not None and now.day - new_user.last_visit.day == 0:
+                if new_user.last_visit is not None and now.day - new_user.last_visit.day == 0\
+                    and now.month == new_user.last_visit.month:
                     query = update(Pupils).where(Pupils.pupil_id == id).values(out_time=now, last_generated_code=str(uuid4()))
                 else:
                     query = update(Pupils).where(Pupils.pupil_id == id).values(last_visit=now, last_generated_code=str(uuid4()))
